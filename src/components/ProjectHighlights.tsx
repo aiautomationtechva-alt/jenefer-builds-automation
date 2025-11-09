@@ -14,7 +14,7 @@ const projects = [
     tools: ["n8n", "Gmail", "AI"]
   },
   {
-    title: "Weather Forecast Bot",
+    title: "Social Media Content Post",
     description: "Automated weather forecast posting to Facebook using n8n and OpenWeatherMap API",
     image: weatherForecast,
     tools: ["n8n", "Facebook", "Weather API"]
