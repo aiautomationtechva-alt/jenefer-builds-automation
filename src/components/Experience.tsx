@@ -36,7 +36,7 @@ export function Experience() {
               </div>
               <div>
                 <span className="font-semibold text-foreground">English</span>
-                <p className="text-sm text-muted-foreground">Fluent</p>
+                <p className="text-sm text-muted-foreground">Conversational</p>
               </div>
             </div>
           </div>
