@@ -7,6 +7,7 @@ import { ProjectHighlights } from "@/components/ProjectHighlights";
 import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -34,6 +35,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <AnimatedBackground />
       <Header />
       <Hero />
       <About />
