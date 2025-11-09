@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 export function Hero() {
   const scrollToContact = () => {
@@ -56,8 +57,8 @@ export function Hero() {
           <div className="relative">
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"></div>
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
-              alt="Jenefer Gado"
+              src={profilePhoto}
+              alt="Jenefer Gado - Workflow Automation Specialist"
               className="relative rounded-full w-80 h-80 object-cover shadow-2xl ring-4 ring-primary/20 transition-transform duration-300 hover:scale-105"
             />
           </div>
