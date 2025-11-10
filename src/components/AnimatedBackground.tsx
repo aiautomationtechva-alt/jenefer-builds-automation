@@ -8,6 +8,14 @@ interface Dot {
   radius: number;
 }
 
+interface Bubble {
+  x: number;
+  y: number;
+  radius: number;
+  speed: number;
+  opacity: number;
+}
+
 export const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -41,7 +49,21 @@ export const AnimatedBackground = () => {
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
-        radius: 2
+        radius: 3.5
+      });
+    }
+
+    // Create bubbles
+    const bubbles: Bubble[] = [];
+    const numBubbles = Math.floor((canvas.width * canvas.height) / 20000);
+    
+    for (let i = 0; i < numBubbles; i++) {
+      bubbles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 30 + 20,
+        speed: Math.random() * 0.5 + 0.3,
+        opacity: Math.random() * 0.1 + 0.05
       });
     }
 
@@ -50,6 +72,27 @@ export const AnimatedBackground = () => {
     
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update and draw bubbles
+      bubbles.forEach((bubble) => {
+        // Move bubble upward
+        bubble.y -= bubble.speed;
+
+        // Reset bubble to bottom when it goes off screen
+        if (bubble.y + bubble.radius < 0) {
+          bubble.y = canvas.height + bubble.radius;
+          bubble.x = Math.random() * canvas.width;
+        }
+
+        // Draw bubble
+        ctx.beginPath();
+        ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${primaryColor} / ${bubble.opacity})`;
+        ctx.fill();
+        ctx.strokeStyle = `hsl(${primaryColor} / ${bubble.opacity * 1.5})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
 
       // Update and draw dots
       dots.forEach((dot, i) => {
