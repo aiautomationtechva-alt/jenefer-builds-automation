@@ -8,6 +8,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
+import { FlyingRobot } from "@/components/FlyingRobot";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -45,6 +46,7 @@ const Index = () => {
       <Testimonials />
       <Contact />
       <Footer />
+      <FlyingRobot />
     </div>
   );
 };
