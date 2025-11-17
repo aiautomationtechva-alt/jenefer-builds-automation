@@ -59,7 +59,7 @@ export function Hero() {
             <img
               src={profilePhoto}
               alt="Jenefer Gado - Workflow Automation Specialist"
-              className="relative rounded-full w-80 h-80 object-cover object-[center_20%] shadow-2xl ring-4 ring-primary/20 transition-transform duration-300 hover:scale-105"
+              className="relative rounded-full w-96 h-96 object-cover object-[center_20%] shadow-2xl ring-4 ring-white transition-transform duration-300 hover:scale-105"
             />
           </div>
         </div>
