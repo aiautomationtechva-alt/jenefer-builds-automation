@@ -114,23 +114,23 @@ export function ProjectHighlights() {
         </Accordion>
 
         <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="max-w-[95vw] max-h-[95vh] w-fit h-fit p-0 overflow-hidden">
+          <DialogContent className="max-w-[98vw] max-h-[98vh] w-fit h-fit p-0 overflow-hidden border-0">
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-50 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors"
+              className="absolute top-4 right-4 z-50 rounded-full bg-black/70 p-3 text-white hover:bg-black/90 transition-colors"
               aria-label="Close"
             >
-              <X className="h-6 w-6" />
+              <X className="h-8 w-8" />
             </button>
             {selectedImage && (
-              <div className="relative">
+              <div className="relative flex items-center justify-center bg-black/95 min-h-[98vh]">
                 <img
                   src={selectedImage.src}
                   alt={selectedImage.title}
-                  className="max-w-full max-h-[95vh] w-auto h-auto object-contain"
+                  className="w-auto h-auto max-w-[98vw] max-h-[98vh] object-contain"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <h3 className="text-white text-2xl font-bold">{selectedImage.title}</h3>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
+                  <h3 className="text-white text-3xl font-bold">{selectedImage.title}</h3>
                 </div>
               </div>
             )}
