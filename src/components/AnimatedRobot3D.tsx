@@ -1,12 +1,17 @@
-import { useRef, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 
-function Robot() {
+interface RobotProps {
+  isHovered: boolean;
+}
+
+function Robot({ isHovered }: RobotProps) {
   const robotRef = useRef<THREE.Group>(null);
   const eyeLeftRef = useRef<THREE.Mesh>(null);
   const eyeRightRef = useRef<THREE.Mesh>(null);
+  const mouthRef = useRef<THREE.Mesh>(null);
   const blinkTimeRef = useRef(0);
   
   useFrame(({ clock }) => {
@@ -39,6 +44,14 @@ function Robot() {
       const glowIntensity = 1 + Math.sin(time * 2) * 0.3;
       (eyeLeftRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity = glowIntensity;
       (eyeRightRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity = glowIntensity;
+    }
+
+    // Animate mouth to smile on hover
+    if (mouthRef.current) {
+      const targetScale = isHovered ? 0.6 : 0.3;
+      const targetRotation = isHovered ? 0.3 : 0;
+      mouthRef.current.scale.x += (targetScale - mouthRef.current.scale.x) * 0.1;
+      mouthRef.current.rotation.z += (targetRotation - mouthRef.current.rotation.z) * 0.1;
     }
   });
 
@@ -82,6 +95,12 @@ function Robot() {
         <meshStandardMaterial color="#00d4ff" emissive="#00d4ff" emissiveIntensity={2} />
       </mesh>
       <pointLight position={[0, 1.5, 0.5]} color="#00d4ff" intensity={1.5} distance={2} />
+
+      {/* Mouth - smiles on hover */}
+      <mesh ref={mouthRef} position={[0, 1.3, 0.36]}>
+        <torusGeometry args={[0.15, 0.025, 8, 16, Math.PI]} />
+        <meshStandardMaterial color="#00d4ff" emissive="#00d4ff" emissiveIntensity={1} />
+      </mesh>
 
       {/* Antenna on top */}
       <mesh position={[0, 2.15, 0]}>
@@ -157,15 +176,21 @@ function Robot() {
 }
 
 export function AnimatedRobot3D() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="fixed bottom-8 right-8 z-50 w-80 h-80 pointer-events-none">
+    <div 
+      className="fixed bottom-8 right-8 z-50 w-80 h-80 pointer-events-auto cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Canvas gl={{ alpha: true, antialias: true }} style={{ background: 'transparent' }}>
         <PerspectiveCamera makeDefault position={[0, 1.5, 4.5]} />
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1.2} castShadow />
         <directionalLight position={[-5, 3, -5]} intensity={0.6} />
         <spotLight position={[0, 5, 0]} intensity={0.5} color="#00d4ff" />
-        <Robot />
+        <Robot isHovered={isHovered} />
       </Canvas>
     </div>
   );
