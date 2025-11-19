@@ -58,16 +58,19 @@ function Robot({ isHovered }: RobotProps) {
     // Wave arm over head when hovered
     if (armRef.current) {
       if (isHovered) {
-        // Wave over head
-        const waveSpeed = 5;
-        const targetRotationZ = Math.sin(time * waveSpeed) * 0.4 - 1.8;
-        const targetRotationX = Math.sin(time * waveSpeed * 0.5) * 0.3 - 0.5;
-        armRef.current.rotation.z += (targetRotationZ - armRef.current.rotation.z) * 0.2;
-        armRef.current.rotation.x += (targetRotationX - armRef.current.rotation.x) * 0.2;
+        // Wave over head - much more dramatic
+        const waveSpeed = 4;
+        const targetRotationZ = Math.sin(time * waveSpeed) * 0.5 - 2.5; // Lift arm high over head
+        const targetRotationX = Math.sin(time * waveSpeed) * 0.6 - 0.8; // Wave side to side
+        const targetRotationY = Math.sin(time * waveSpeed * 0.8) * 0.4; // Add forward motion
+        armRef.current.rotation.z += (targetRotationZ - armRef.current.rotation.z) * 0.15;
+        armRef.current.rotation.x += (targetRotationX - armRef.current.rotation.x) * 0.15;
+        armRef.current.rotation.y += (targetRotationY - armRef.current.rotation.y) * 0.15;
       } else {
         // Return to normal position
         armRef.current.rotation.z += (0 - armRef.current.rotation.z) * 0.1;
         armRef.current.rotation.x += (0 - armRef.current.rotation.x) * 0.1;
+        armRef.current.rotation.y += (0 - armRef.current.rotation.y) * 0.1;
       }
     }
   });
