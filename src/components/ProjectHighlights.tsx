@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 import emailAutomation from "@/assets/portfolio/email-automation.png";
 import weatherForecast from "@/assets/portfolio/weather-forecast.png";
 import zapierLeads from "@/assets/portfolio/zapier-leads.png";
@@ -47,6 +50,8 @@ const projects = [
 ];
 
 export function ProjectHighlights() {
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
+
   return (
     <section id="projects" className="py-20 px-6 bg-secondary/20">
       <div className="container mx-auto">
@@ -64,13 +69,23 @@ export function ProjectHighlights() {
               <Card className="hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden">
                 <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:ring-2 [&[data-state=open]>div]:ring-primary/50">
                   <div className="w-full">
-                    <div className="relative overflow-hidden group">
+                    <div 
+                      className="relative overflow-hidden group cursor-zoom-in"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage({ src: project.image, title: project.title });
+                      }}
+                    >
                       <img 
                         src={project.image} 
                         alt={project.title}
                         className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="text-white font-semibold text-sm bg-black/50 px-4 py-2 rounded-full">
+                          Click to enlarge
+                        </span>
+                      </div>
                     </div>
                     <div className="p-6 pb-4 text-left">
                       <h3 className="text-xl font-bold text-card-foreground mb-2">{project.title}</h3>
@@ -97,6 +112,30 @@ export function ProjectHighlights() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+          <DialogContent className="max-w-[95vw] max-h-[95vh] w-fit h-fit p-0 overflow-hidden">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 z-50 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors"
+              aria-label="Close"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            {selectedImage && (
+              <div className="relative">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  className="max-w-full max-h-[95vh] w-auto h-auto object-contain"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                  <h3 className="text-white text-2xl font-bold">{selectedImage.title}</h3>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
