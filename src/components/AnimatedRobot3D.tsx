@@ -9,7 +9,6 @@ interface RobotProps {
 
 function Robot({ isHovered }: RobotProps) {
   const robotRef = useRef<THREE.Group>(null);
-  const armRef = useRef<THREE.Group>(null);
   const eyeLeftRef = useRef<THREE.Mesh>(null);
   const eyeRightRef = useRef<THREE.Mesh>(null);
   const mouthRef = useRef<THREE.Mesh>(null);
@@ -53,25 +52,6 @@ function Robot({ isHovered }: RobotProps) {
       const targetRotation = isHovered ? 0.3 : 0;
       mouthRef.current.scale.x += (targetScale - mouthRef.current.scale.x) * 0.1;
       mouthRef.current.rotation.z += (targetRotation - mouthRef.current.rotation.z) * 0.1;
-    }
-
-    // Wave arm over head when hovered
-    if (armRef.current) {
-      if (isHovered) {
-        // Wave over head - much more dramatic
-        const waveSpeed = 4;
-        const targetRotationZ = Math.sin(time * waveSpeed) * 0.5 - 2.5; // Lift arm high over head
-        const targetRotationX = Math.sin(time * waveSpeed) * 0.6 - 0.8; // Wave side to side
-        const targetRotationY = Math.sin(time * waveSpeed * 0.8) * 0.4; // Add forward motion
-        armRef.current.rotation.z += (targetRotationZ - armRef.current.rotation.z) * 0.15;
-        armRef.current.rotation.x += (targetRotationX - armRef.current.rotation.x) * 0.15;
-        armRef.current.rotation.y += (targetRotationY - armRef.current.rotation.y) * 0.15;
-      } else {
-        // Return to normal position
-        armRef.current.rotation.z += (0 - armRef.current.rotation.z) * 0.1;
-        armRef.current.rotation.x += (0 - armRef.current.rotation.x) * 0.1;
-        armRef.current.rotation.y += (0 - armRef.current.rotation.y) * 0.1;
-      }
     }
   });
 
@@ -166,8 +146,8 @@ function Robot({ isHovered }: RobotProps) {
         </mesh>
       </group>
 
-      {/* Right Arm - blue with claw, waves over head on hover */}
-      <group ref={armRef} position={[0.5, 0.9, 0]}>
+      {/* Right Arm - blue with claw */}
+      <group position={[0.5, 0.9, 0]}>
         <mesh position={[0, -0.25, 0]}>
           <cylinderGeometry args={[0.1, 0.12, 0.5, 16]} />
           <meshStandardMaterial color="#5b9bd5" metalness={0.6} roughness={0.3} />
