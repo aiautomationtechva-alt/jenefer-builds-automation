@@ -5,7 +5,6 @@ import * as THREE from "three";
 
 function Robot() {
   const robotRef = useRef<THREE.Group>(null);
-  const armRef = useRef<THREE.Group>(null);
   const eyeLeftRef = useRef<THREE.Mesh>(null);
   const eyeRightRef = useRef<THREE.Mesh>(null);
   const blinkTimeRef = useRef(0);
@@ -20,14 +19,6 @@ function Robot() {
       // Gentle rotation while flying
       robotRef.current.rotation.y = Math.sin(time * 0.5) * 0.3;
       robotRef.current.rotation.z = Math.cos(time * 0.6) * 0.1;
-    }
-    
-    if (armRef.current) {
-      // Waving animation
-      const waveSpeed = 3;
-      const waveAmount = 1;
-      armRef.current.rotation.z = Math.sin(time * waveSpeed) * waveAmount - 0.5;
-      armRef.current.rotation.x = Math.sin(time * waveSpeed * 0.5) * 0.3;
     }
 
     // Blinking animation
@@ -136,18 +127,18 @@ function Robot() {
         </mesh>
       </group>
 
-      {/* Right Arm - blue with claw, waving */}
-      <group ref={armRef} position={[0.5, 0.9, 0]}>
+      {/* Right Arm - blue with claw */}
+      <group position={[0.5, 0.9, 0]}>
         <mesh position={[0, -0.25, 0]}>
           <cylinderGeometry args={[0.1, 0.12, 0.5, 16]} />
           <meshStandardMaterial color="#5b9bd5" metalness={0.6} roughness={0.3} />
         </mesh>
         {/* Claw hand - two prongs */}
-        <mesh position={[-0.08, -0.55, 0]} rotation={[0, 0, 0.5]}>
+        <mesh position={[-0.08, -0.55, 0]} rotation={[0, 0, 0.3]}>
           <boxGeometry args={[0.08, 0.2, 0.06]} />
           <meshStandardMaterial color="#5b9bd5" metalness={0.6} roughness={0.3} />
         </mesh>
-        <mesh position={[0.08, -0.55, 0]} rotation={[0, 0, -0.5]}>
+        <mesh position={[0.08, -0.55, 0]} rotation={[0, 0, -0.3]}>
           <boxGeometry args={[0.08, 0.2, 0.06]} />
           <meshStandardMaterial color="#5b9bd5" metalness={0.6} roughness={0.3} />
         </mesh>
