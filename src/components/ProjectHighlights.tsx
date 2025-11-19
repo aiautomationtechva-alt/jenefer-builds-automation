@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import emailAutomation from "@/assets/portfolio/email-automation.png";
 import weatherForecast from "@/assets/portfolio/weather-forecast.png";
 import zapierLeads from "@/assets/portfolio/zapier-leads.png";
@@ -53,37 +54,49 @@ export function ProjectHighlights() {
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           Real automation workflows built with Zapier, Make.com, and n8n
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Accordion type="single" collapsible className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <Card 
+            <AccordionItem 
               key={index}
-              className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-border bg-card overflow-hidden group"
+              value={`project-${index}`}
+              className="border-none"
             >
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold text-card-foreground mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 text-sm">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tools.map((tool, i) => (
-                    <span 
-                      key={i}
-                      className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+              <Card className="hover:shadow-xl transition-all duration-300 border-border bg-card overflow-hidden">
+                <AccordionTrigger className="hover:no-underline p-0 [&[data-state=open]>div]:ring-2 [&[data-state=open]>div]:ring-primary/50">
+                  <div className="w-full">
+                    <div className="relative overflow-hidden group">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-48 object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-6 pb-4 text-left">
+                      <h3 className="text-xl font-bold text-card-foreground mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm line-clamp-2">{project.description}</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <CardContent className="pt-0 pb-6">
+                    <p className="text-muted-foreground mb-4 text-sm">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tools.map((tool, i) => (
+                        <span 
+                          key={i}
+                          className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </AccordionContent>
+              </Card>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </section>
   );
