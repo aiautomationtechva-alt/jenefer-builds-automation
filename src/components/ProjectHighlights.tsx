@@ -89,7 +89,7 @@ export function ProjectHighlights() {
                     </div>
                     <div className="p-6 pb-4 text-left">
                       <h3 className="text-xl font-bold text-card-foreground mb-3">{project.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{project.description}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
                     </div>
                   </div>
                 </AccordionTrigger>
