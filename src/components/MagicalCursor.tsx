@@ -42,27 +42,58 @@ export function MagicalCursor() {
         }}
       >
         {/* Outer glow */}
-        <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400/40 blur-2xl animate-pulse" />
+        <div className="absolute inset-0 w-20 h-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400/40 blur-2xl animate-pulse" />
         
-        {/* Middle ring */}
-        <div className="absolute inset-0 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-3 border-yellow-400/60 animate-ping" />
+        {/* Star wand */}
+        <svg
+          className="absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 animate-pulse"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Star shape */}
+          <path
+            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+            fill="#facc15"
+            stroke="#fef08a"
+            strokeWidth="1"
+            filter="url(#glow)"
+          />
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
         
-        {/* Center dot */}
-        <div className="absolute inset-0 w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.9)]" />
+        {/* Sparkles around star */}
+        <div className="absolute inset-0 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-yellow-400/50 animate-ping" />
       </div>
 
       {/* Sparkle particles */}
       {particles.map((particle) => (
-        <div
+        <svg
           key={particle.id}
-          className="pointer-events-none fixed z-[9998] w-2 h-2 rounded-full bg-yellow-400 animate-fade-out"
+          className="pointer-events-none fixed z-[9998] w-3 h-3 animate-fade-out"
           style={{
             left: `${particle.x}px`,
             top: `${particle.y}px`,
-            boxShadow: "0 0 12px rgb(250, 204, 21)",
             animation: "fade-out 1s ease-out forwards, scale-out 1s ease-out forwards",
           }}
-        />
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+            fill="#facc15"
+            style={{ filter: "drop-shadow(0 0 4px rgb(250, 204, 21))" }}
+          />
+        </svg>
       ))}
 
       {/* Custom cursor styles */}
