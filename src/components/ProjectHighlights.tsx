@@ -13,37 +13,37 @@ import gmailIntegration from "@/assets/portfolio/gmail-integration.png";
 const projects = [
   {
     title: "Email Response Automation",
-    description: "Automated email categorization and response system using n8n with AI integration",
+    description: "Smart email handling system that automatically categorizes incoming emails, analyzes content using AI, and generates contextually appropriate responses. This workflow reduces manual email processing time by 80% and ensures consistent, professional communication.",
     image: emailAutomation,
     tools: ["n8n", "Gmail", "AI"]
   },
   {
     title: "Social Media Content Post",
-    description: "Automated weather forecast posting to Facebook using n8n and OpenWeatherMap API",
+    description: "Fully automated weather content system that fetches real-time weather data, generates engaging posts with weather insights, and publishes to Facebook on a schedule. Perfect for local businesses wanting consistent social media presence.",
     image: weatherForecast,
     tools: ["n8n", "Facebook", "Weather API"]
   },
   {
     title: "Lead Management System",
-    description: "Multi-path lead automation workflow with Zapier connecting forms to CRM and notifications",
+    description: "Comprehensive lead capture and distribution workflow that collects form submissions, stores data in Google Drive, sends instant email notifications to sales team, and creates organized tasks in Asana. Ensures no lead falls through the cracks.",
     image: zapierLeads,
     tools: ["Zapier", "Google Drive", "Gmail", "Asana"]
   },
   {
     title: "Slack Team Integration",
-    description: "Custom webhook to Slack messaging system for team coordination using Make.com",
+    description: "Real-time team notification system that receives webhook data from various sources and delivers formatted, actionable messages to specific Slack channels. Keeps teams instantly informed of critical events and updates.",
     image: slackIntegration,
     tools: ["Make.com", "Slack", "Webhooks"]
   },
   {
     title: "Accounting Integration",
-    description: "Automated workflow connecting Asana tasks with Xero accounting via Make.com",
+    description: "Seamless financial workflow connecting project management with accounting. Automatically syncs completed Asana tasks to Xero invoices, updates Google Sheets for reporting, and maintains accurate financial records without manual data entry.",
     image: asanaXero,
     tools: ["Make.com", "Asana", "Xero", "Google Sheets"]
   },
   {
     title: "Gmail Automation Suite",
-    description: "Comprehensive email automation with AI-powered responses and Google Drive integration",
+    description: "Advanced email processing system featuring AI-powered response generation, automatic attachment handling with Google Drive storage, intelligent email categorization, and smart reply suggestions. Transforms email management from hours to minutes.",
     image: gmailIntegration,
     tools: ["Make.com", "Gmail", "Google Drive", "AI"]
   }
@@ -88,8 +88,8 @@ export function ProjectHighlights() {
                       </div>
                     </div>
                     <div className="p-6 pb-4 text-left">
-                      <h3 className="text-xl font-bold text-card-foreground mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground text-sm line-clamp-2">{project.description}</p>
+                      <h3 className="text-xl font-bold text-card-foreground mb-3">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{project.description}</p>
                     </div>
                   </div>
                 </AccordionTrigger>
