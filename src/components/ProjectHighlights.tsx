@@ -95,7 +95,6 @@ export function ProjectHighlights() {
                 </AccordionTrigger>
                 <AccordionContent>
                   <CardContent className="pt-0 pb-6">
-                    <p className="text-muted-foreground mb-4 text-sm">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tools.map((tool, i) => (
                         <span 
