@@ -34,7 +34,7 @@ export function MagicalCursor() {
     <>
       {/* Main magical cursor */}
       <div
-        className="pointer-events-none fixed z-[9999] mix-blend-difference"
+        className="pointer-events-none fixed z-[9999]"
         style={{
           left: `${cursorPosition.x}px`,
           top: `${cursorPosition.y}px`,
@@ -42,24 +42,24 @@ export function MagicalCursor() {
         }}
       >
         {/* Outer glow */}
-        <div className="absolute inset-0 w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/30 blur-xl animate-pulse" />
+        <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400/40 blur-2xl animate-pulse" />
         
         {/* Middle ring */}
-        <div className="absolute inset-0 w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary/50 animate-ping" />
+        <div className="absolute inset-0 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-3 border-yellow-400/60 animate-ping" />
         
         {/* Center dot */}
-        <div className="absolute inset-0 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.8)]" />
+        <div className="absolute inset-0 w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.9)]" />
       </div>
 
       {/* Sparkle particles */}
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="pointer-events-none fixed z-[9998] w-1 h-1 rounded-full bg-primary animate-fade-out"
+          className="pointer-events-none fixed z-[9998] w-2 h-2 rounded-full bg-yellow-400 animate-fade-out"
           style={{
             left: `${particle.x}px`,
             top: `${particle.y}px`,
-            boxShadow: "0 0 8px currentColor",
+            boxShadow: "0 0 12px rgb(250, 204, 21)",
             animation: "fade-out 1s ease-out forwards, scale-out 1s ease-out forwards",
           }}
         />
