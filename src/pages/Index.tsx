@@ -9,6 +9,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { AnimatedRobot3D } from "@/components/AnimatedRobot3D";
+import { MagicalCursor } from "@/components/MagicalCursor";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -37,6 +38,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <AnimatedBackground />
+      <MagicalCursor />
       <Header />
       <Hero />
       <About />
