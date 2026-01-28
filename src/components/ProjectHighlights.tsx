@@ -15,37 +15,43 @@ const projects = [
     title: "Email Response Automation",
     description: "Smart email handling system that automatically categorizes incoming emails, analyzes content using AI, and generates contextually appropriate responses. This workflow reduces manual email processing time by 80% and ensures consistent, professional communication.",
     image: emailAutomation,
-    tools: ["n8n", "Gmail", "AI"]
+    tools: ["n8n", "Gmail", "AI"],
+    savings: "$2,400/month"
   },
   {
     title: "Social Media Content Post",
     description: "Fully automated weather content system that fetches real-time weather data, generates engaging posts with weather insights, and publishes to Facebook on a schedule. Perfect for local businesses wanting consistent social media presence.",
     image: weatherForecast,
-    tools: ["n8n", "Facebook", "Weather API"]
+    tools: ["n8n", "Facebook", "Weather API"],
+    savings: "$1,200/month"
   },
   {
     title: "Lead Management System",
     description: "Comprehensive lead capture and distribution workflow that collects form submissions, stores data in Google Drive, sends instant email notifications to sales team, and creates organized tasks in Asana. Ensures no lead falls through the cracks.",
     image: zapierLeads,
-    tools: ["Zapier", "Google Drive", "Gmail", "Asana"]
+    tools: ["Zapier", "Google Drive", "Gmail", "Asana"],
+    savings: "$3,500/month"
   },
   {
     title: "Slack Team Integration",
     description: "Real-time team notification system that receives webhook data from various sources and delivers formatted, actionable messages to specific Slack channels. Keeps teams instantly informed of critical events and updates.",
     image: slackIntegration,
-    tools: ["Make.com", "Slack", "Webhooks"]
+    tools: ["Make.com", "Slack", "Webhooks"],
+    savings: "$800/month"
   },
   {
     title: "Accounting Integration",
     description: "Seamless financial workflow connecting project management with accounting. Automatically syncs completed Asana tasks to Xero invoices, updates Google Sheets for reporting, and maintains accurate financial records without manual data entry.",
     image: asanaXero,
-    tools: ["Make.com", "Asana", "Xero", "Google Sheets"]
+    tools: ["Make.com", "Asana", "Xero", "Google Sheets"],
+    savings: "$4,200/month"
   },
   {
     title: "Gmail Automation Suite",
     description: "Advanced email processing system featuring AI-powered response generation, automatic attachment handling with Google Drive storage, intelligent email categorization, and smart reply suggestions. Transforms email management from hours to minutes.",
     image: gmailIntegration,
-    tools: ["Make.com", "Gmail", "Google Drive", "AI"]
+    tools: ["Make.com", "Gmail", "Google Drive", "AI"],
+    savings: "$1,800/month"
   }
 ];
 
@@ -88,7 +94,12 @@ export function ProjectHighlights() {
                       </div>
                     </div>
                     <div className="p-6 pb-4 text-left">
-                      <h3 className="text-xl font-bold text-card-foreground mb-3">{project.title}</h3>
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-bold text-card-foreground">{project.title}</h3>
+                        <span className="px-3 py-1 bg-green-500/20 text-green-600 dark:text-green-400 text-sm font-bold rounded-full whitespace-nowrap">
+                          Save {project.savings}
+                        </span>
+                      </div>
                       <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
                     </div>
                   </div>
