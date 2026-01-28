@@ -8,7 +8,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { AnimatedRobot3D } from "@/components/AnimatedRobot3D";
+
 import { MagicalCursor } from "@/components/MagicalCursor";
 import { useEffect } from "react";
 
@@ -48,7 +48,7 @@ const Index = () => {
       <Testimonials />
       <Contact />
       <Footer />
-      <AnimatedRobot3D />
+      
     </div>
   );
 };
