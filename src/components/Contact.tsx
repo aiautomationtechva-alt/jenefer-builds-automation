@@ -1,97 +1,75 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, Clock, Video } from "lucide-react";
+import { useEffect } from "react";
 
 export function Contact() {
+  useEffect(() => {
+    // Load Calendly widget script
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <section id="contact" className="py-20 px-6 bg-card">
-      <div className="container mx-auto max-w-4xl">
-        <h2 className="text-4xl font-bold text-center mb-12 text-foreground">Get In Touch</h2>
+      <div className="container mx-auto max-w-5xl">
+        <h2 className="text-4xl font-bold text-center mb-4 text-foreground">Get In Touch</h2>
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          Ready to streamline your business? Book a free discovery call to discuss your automation needs.
+        </p>
+        
         <Card className="bg-background border-border">
           <CardContent className="p-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-foreground mb-4">Let's Connect</h3>
-                <p className="text-muted-foreground mb-6">
-                  Ready to streamline your business processes? I'm here to help you automate and optimize your workflows.
-                </p>
-                
-                <div className="space-y-4">
-                  <a 
-                    href="mailto:jenefergado.techva@gmail.com"
-                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-300 group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                      <Mail className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">jenefergado.techva@gmail.com</p>
-                    </div>
-                  </a>
-
-                  <a 
-                    href="tel:+639695182763"
-                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-300 group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                      <Phone className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Phone</p>
-                      <p className="font-medium">+639695182763</p>
-                    </div>
-                  </a>
-
-                  <div className="flex items-center gap-3 text-foreground">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Location</p>
-                      <p className="font-medium">Manila, Philippines</p>
-                    </div>
-                  </div>
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-secondary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Calendar className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">Pick a Date</p>
+                  <p className="text-sm text-muted-foreground">Choose your preferred day</p>
                 </div>
               </div>
-
-              <div className="space-y-4">
-                <div className="bg-secondary/20 rounded-xl p-6 space-y-4">
-                  <h4 className="font-semibold text-foreground">Quick Response</h4>
-                  <p className="text-sm text-muted-foreground">
-                    I typically respond within 24 hours. Let me know how I can help optimize your workflows!
-                  </p>
-                  <Button 
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
-                    onClick={() => window.location.href = 'mailto:jenefergado.techva@gmail.com'}
-                  >
-                    Send Email
-                  </Button>
+              
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-secondary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Clock className="h-6 w-6 text-primary" />
                 </div>
-                
-                <div className="bg-accent/10 rounded-xl p-6">
-                  <h4 className="font-semibold text-foreground mb-2">Available For</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary">•</span>
-                      Automation Consulting
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary">•</span>
-                      Workflow Optimization
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary">•</span>
-                      API Integrations
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary">•</span>
-                      Process Automation
-                    </li>
-                  </ul>
+                <div>
+                  <p className="font-semibold text-foreground">30-Min Call</p>
+                  <p className="text-sm text-muted-foreground">Free consultation session</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-secondary/20">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Video className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">Video Meeting</p>
+                  <p className="text-sm text-muted-foreground">Via Google Meet or Zoom</p>
                 </div>
               </div>
             </div>
+
+            {/* Calendly Embed */}
+            <div 
+              className="calendly-inline-widget rounded-xl overflow-hidden" 
+              data-url="https://calendly.com/YOUR_CALENDLY_USERNAME/discovery-call"
+              style={{ minWidth: "320px", height: "700px" }}
+            />
+            
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              Can't find a suitable time? Email me at{" "}
+              <a href="mailto:jenefergado.techva@gmail.com" className="text-primary hover:underline">
+                jenefergado.techva@gmail.com
+              </a>
+            </p>
           </CardContent>
         </Card>
       </div>
