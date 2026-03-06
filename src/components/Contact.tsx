@@ -8,10 +8,36 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-const timeSlots = [
-  "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
-  "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM", "12:00 AM"
+// Philippine time slots (UTC+8) — we convert to local time for display
+const phTimeSlots = [
+  { hour: 19, minute: 0 },
+  { hour: 19, minute: 30 },
+  { hour: 20, minute: 0 },
+  { hour: 20, minute: 30 },
+  { hour: 21, minute: 0 },
+  { hour: 21, minute: 30 },
+  { hour: 22, minute: 0 },
+  { hour: 22, minute: 30 },
+  { hour: 23, minute: 0 },
+  { hour: 23, minute: 30 },
+  { hour: 0, minute: 0 }, // midnight = next day in PH
 ];
+
+function phToLocal(phHour: number, phMinute: number): string {
+  // Create a date in Philippine time (UTC+8) and convert to local
+  const now = new Date();
+  const utcHour = phHour - 8; // Convert PH to UTC
+  const date = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), utcHour, phMinute));
+  return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+function phToLabel(slot: { hour: number; minute: number }): string {
+  return phToLocal(slot.hour, slot.minute);
+}
+
+function phSlotKey(slot: { hour: number; minute: number }): string {
+  return `${slot.hour}:${slot.minute.toString().padStart(2, '0')}`;
+}
 
 export function Contact() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
