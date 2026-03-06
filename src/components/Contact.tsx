@@ -179,7 +179,10 @@ export function Contact() {
                   <p className="text-sm text-foreground">
                     <span className="font-semibold">Selected:</span>{" "}
                     {selectedDate ? format(selectedDate, "EEEE, MMMM do, yyyy") : "No date selected"}
-                    {selectedTime && ` at ${selectedTime}`}
+                    {selectedTime && (() => {
+                      const [h, m] = selectedTime.split(':').map(Number);
+                      return ` at ${phToLocal(h, m)}`;
+                    })()}
                   </p>
                 </div>
               )}
