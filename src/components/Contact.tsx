@@ -126,20 +126,24 @@ export function Contact() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-4 text-center">Select a Time</h3>
                   <div className="grid grid-cols-3 gap-2">
-                    {timeSlots.map((time) => (
-                      <Button
-                        key={time}
-                        type="button"
-                        variant={selectedTime === time ? "default" : "outline"}
-                        className={cn(
-                          "text-sm",
-                          selectedTime === time && "bg-primary text-primary-foreground"
-                        )}
-                        onClick={() => setSelectedTime(time)}
-                      >
-                        {time}
-                      </Button>
-                    ))}
+                    {phTimeSlots.map((slot) => {
+                      const key = phSlotKey(slot);
+                      const label = phToLabel(slot);
+                      return (
+                        <Button
+                          key={key}
+                          type="button"
+                          variant={selectedTime === key ? "default" : "outline"}
+                          className={cn(
+                            "text-sm",
+                            selectedTime === key && "bg-primary text-primary-foreground"
+                          )}
+                          onClick={() => setSelectedTime(key)}
+                        >
+                          {label}
+                        </Button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
