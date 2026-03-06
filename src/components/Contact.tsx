@@ -8,10 +8,36 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-const timeSlots = [
-  "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
-  "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM", "12:00 AM"
+// Philippine time slots (UTC+8) — we convert to local time for display
+const phTimeSlots = [
+  { hour: 19, minute: 0 },
+  { hour: 19, minute: 30 },
+  { hour: 20, minute: 0 },
+  { hour: 20, minute: 30 },
+  { hour: 21, minute: 0 },
+  { hour: 21, minute: 30 },
+  { hour: 22, minute: 0 },
+  { hour: 22, minute: 30 },
+  { hour: 23, minute: 0 },
+  { hour: 23, minute: 30 },
+  { hour: 0, minute: 0 }, // midnight = next day in PH
 ];
+
+function phToLocal(phHour: number, phMinute: number): string {
+  // Create a date in Philippine time (UTC+8) and convert to local
+  const now = new Date();
+  const utcHour = phHour - 8; // Convert PH to UTC
+  const date = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), utcHour, phMinute));
+  return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+function phToLabel(slot: { hour: number; minute: number }): string {
+  return phToLocal(slot.hour, slot.minute);
+}
+
+function phSlotKey(slot: { hour: number; minute: number }): string {
+  return `${slot.hour}:${slot.minute.toString().padStart(2, '0')}`;
+}
 
 export function Contact() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -29,7 +55,9 @@ export function Contact() {
         email
       };
       console.log("Booking submitted:", bookingDetails);
-      alert(`Discovery call booked for ${format(selectedDate, "PPP")} at ${selectedTime}. We'll send a confirmation to ${email}.`);
+      const [h, m] = selectedTime.split(':').map(Number);
+      const localTimeLabel = phToLocal(h, m);
+      alert(`Discovery call booked for ${format(selectedDate, "PPP")} at ${localTimeLabel}. We'll send a confirmation to ${email}.`);
       // Reset form
       setSelectedDate(undefined);
       setSelectedTime(undefined);
@@ -100,20 +128,24 @@ export function Contact() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-4 text-center">Select a Time</h3>
                   <div className="grid grid-cols-3 gap-2">
-                    {timeSlots.map((time) => (
-                      <Button
-                        key={time}
-                        type="button"
-                        variant={selectedTime === time ? "default" : "outline"}
-                        className={cn(
-                          "text-sm",
-                          selectedTime === time && "bg-primary text-primary-foreground"
-                        )}
-                        onClick={() => setSelectedTime(time)}
-                      >
-                        {time}
-                      </Button>
-                    ))}
+                    {phTimeSlots.map((slot) => {
+                      const key = phSlotKey(slot);
+                      const label = phToLabel(slot);
+                      return (
+                        <Button
+                          key={key}
+                          type="button"
+                          variant={selectedTime === key ? "default" : "outline"}
+                          className={cn(
+                            "text-sm",
+                            selectedTime === key && "bg-primary text-primary-foreground"
+                          )}
+                          onClick={() => setSelectedTime(key)}
+                        >
+                          {label}
+                        </Button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -149,7 +181,10 @@ export function Contact() {
                   <p className="text-sm text-foreground">
                     <span className="font-semibold">Selected:</span>{" "}
                     {selectedDate ? format(selectedDate, "EEEE, MMMM do, yyyy") : "No date selected"}
-                    {selectedTime && ` at ${selectedTime}`}
+                    {selectedTime && (() => {
+                      const [h, m] = selectedTime.split(':').map(Number);
+                      return ` at ${phToLocal(h, m)}`;
+                    })()}
                   </p>
                 </div>
               )}
