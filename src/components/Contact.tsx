@@ -55,7 +55,9 @@ export function Contact() {
         email
       };
       console.log("Booking submitted:", bookingDetails);
-      alert(`Discovery call booked for ${format(selectedDate, "PPP")} at ${selectedTime}. We'll send a confirmation to ${email}.`);
+      const [h, m] = selectedTime.split(':').map(Number);
+      const localTimeLabel = phToLocal(h, m);
+      alert(`Discovery call booked for ${format(selectedDate, "PPP")} at ${localTimeLabel}. We'll send a confirmation to ${email}.`);
       // Reset form
       setSelectedDate(undefined);
       setSelectedTime(undefined);
